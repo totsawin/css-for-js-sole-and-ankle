@@ -35,7 +35,7 @@ const MainHeader = styled.div`
   height: 72px;
   line-height: 72px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
 `;
 
 const Side = styled.div`
