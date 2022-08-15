@@ -30,12 +30,11 @@ const Header = () => {
 };
 
 const MainHeader = styled.div`
-  padding: 0px 32px;
+  padding: 20px 32px;
   border-bottom: 1px solid ${COLORS.gray[300]};
   height: 72px;
-  line-height: 72px;
   display: flex;
-  align-items: center;
+  align-items: baseline;
 `;
 
 const Side = styled.div`
@@ -45,7 +44,7 @@ const Side = styled.div`
 const Nav = styled.nav`
   display: flex;
   gap: 48px;
-  padding: 0px 48px; 
+  margin: 0px 48px; 
 `;
 
 const NavLink = styled.a`
