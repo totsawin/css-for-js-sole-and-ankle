@@ -35,15 +35,19 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
+          { variant === 'on-sale' &&  <SaleBanner>Sale</SaleBanner>}
+          { variant === 'new-release' &&  <NewReleaseBanner>Just Released!</NewReleaseBanner>}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price style={{ '--color': variant === 'on-sale' ? COLORS.gray[700]: COLORS.gray[900],
+          '--text-decoration-line': variant === 'on-sale' ? 'line-through': 'none' }}>{formatPrice(price)}</Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          { variant === 'on-sale' && <SalePrice>{formatPrice(salePrice)}</SalePrice>}
         </Row>
       </Wrapper>
     </Link>
@@ -55,16 +59,22 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
@@ -72,7 +82,11 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  font-weight: ${WEIGHTS.normal};
+  color: var(--color);
+  text-decoration-line: var(--text-decoration-line);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
@@ -81,6 +95,27 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+`;
+
+const Banner = styled.div`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0px 10px;
+  border-radius: 2px;
+  color: ${COLORS.white}; 
+  font-size: 14px;
+  font-weight: ${WEIGHTS.bold}; 
+`;
+
+const SaleBanner = styled(Banner)`
+  background-color: ${COLORS.primary}; 
+`;
+
+const NewReleaseBanner = styled(Banner)`
+  background-color: ${COLORS.secondary}; 
 `;
 
 export default ShoeCard;
